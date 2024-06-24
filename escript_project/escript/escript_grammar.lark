@@ -1,0 +1,35 @@
+start: function+
+
+function: "function" NAME "(" [params] ")" "{" statements "}"
+params: NAME ("," NAME)*
+statements: statement*
+statement: assign | function_call | print | input | conditional | file_create | file_write | file_save | db_create | db_write | db_save | db_read
+
+assign: NAME "=" expr ";"
+function_call: NAME "(" [args] ")" ";"
+print: "P" "(" STRING ")" ";"
+print_var: "P" "$" NAME ";"
+input: NAME "=" "IN" "(" STRING ")" ";"
+conditional: "if" "(" condition ")" "{" statements "}" ["else" "{" statements "}"]
+
+file_create: "File.create" "(" STRING "," STRING ")" ";"
+file_write: "File.write" "(" NAME ")" ";"
+file_save: "File.save" "()" ";"
+db_create: "Db.create" "(" STRING ")" ";"
+db_write: "Db.write" "(" NAME ")" ";"
+db_save: "Db.save" "()" ";"
+db_read: NAME "=" "Db.read" "(" STRING ")" "(" STRING ")" ";"
+
+condition: expr comparator expr
+comparator: "==" | "!=" | ">" | ">=" | "<" | "<="
+
+expr: NAME | NUMBER | STRING
+args: expr ("," expr)*
+
+%import common.CNAME -> NAME
+%import common.INT -> NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
+
+NAME: /[a-z][a-zA-Z0-9_]*/  // Modified to enforce variable naming rules
