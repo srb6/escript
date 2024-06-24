@@ -1,8 +1,0 @@
-Metadata-Version: 2.1
-Name: simpledb
-Version: 1.0.0
-Summary: A simple database system for storing various types of data in binary format
-Author: Your Name
-Author-email: your@email.com
-Requires-Python: >=3.6
-License-File: LICENSE
